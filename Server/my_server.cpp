@@ -30,7 +30,6 @@ void My_Server::on_Create_New_Server_BTN_clicked()
 
     connect(myServer, SIGNAL(newConnection()), this, SLOT(handle_new_connection()));
     ui->server_state->clear();
-    ui->spinBox->clear();
     ui->Server_StackWidget->show();
     ui->Server_StackWidget->setCurrentIndex(0);
     ui->Text_shower->clear();
@@ -94,6 +93,8 @@ void My_Server::sendDataToClient()
     if (currentClient == nullptr && clients.isEmpty()) {
         return;
     }
+    if(!Commands_List.contains(data))
+        Commands_List.append(data);
 
     if (ui->send_to_all->isChecked())
     {
@@ -102,6 +103,7 @@ void My_Server::sendDataToClient()
         for (QTcpSocket* client : clients)
         {
                 client->write(data);
+                command_index = 0;
         }
     }
     else
@@ -111,6 +113,7 @@ void My_Server::sendDataToClient()
             qDebug() << "send data to " + ui->Curent_Client_comboBox->currentText();
             ui->Text_shower->append("send to " + ui->Curent_Client_comboBox->currentText() + " : " + data);
                 currentClient->write(data);
+                command_index = 0;
         }
     }
 }
@@ -134,7 +137,6 @@ void My_Server::on_Send_BTN_clicked()
        }
     }
 
-
     ui->message_LE->clear();
     ui->message_LE->setFocus();
 }
@@ -150,11 +152,48 @@ void My_Server::on_listen_btn_clicked()
         myServer->close();
         ui->server_state->setText("Server stopped");
     } else {
-        if (myServer->listen(QHostAddress::Any, ui->spinBox->value())) {
+        if (myServer->listen(QHostAddress::Any, 8080)) {
             ui->server_state->setText("Server is listening to clients");
         } else {
             ui->server_state->setText("Failed to start server");
         }
     }
+}
+
+void My_Server::keyPressEvent(QKeyEvent *kp)
+{
+    if(Commands_List.length() > 0)
+    {
+        qDebug() << command_index;
+        if(kp->key() == Qt::Key_Up)
+        {
+            if(command_index < Commands_List.length())
+            {
+                ui->message_LE->clear();
+                ui->message_LE->setText(Commands_List.at(command_index));
+                command_index++;
+            }
+        }
+        if(kp->key() == Qt::Key_Down)
+        {
+            if(command_index > 0)
+            {
+                command_index--;
+                ui->message_LE->clear();
+                ui->message_LE->setText(Commands_List.at(command_index));
+            }
+        }
+    }
+}
+
+
+void My_Server::on_Curent_Client_comboBox_currentIndexChanged(const QString &address)
+{
+    QTcpSocket* new_client;
+
+    if (clientConnections->contains(address)) {
+        return;
+    }
+//    new_client = clients. ;
 }
 

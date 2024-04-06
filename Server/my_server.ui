@@ -53,7 +53,7 @@
        <string notr="true">background-color: rgb(187, 199, 255);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -89,14 +89,7 @@
         </item>
         <item>
          <layout class="QFormLayout" name="formLayout">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>port :</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
+          <item row="0" column="1">
            <widget class="QPushButton" name="listen_btn">
             <property name="cursor">
              <cursorShape>OpenHandCursor</cursorShape>
@@ -106,14 +99,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="spinBox">
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QPushButton" name="go_to_clients">
             <property name="cursor">
              <cursorShape>OpenHandCursor</cursorShape>
@@ -141,13 +127,6 @@
           </property>
          </spacer>
         </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>hide</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_2">
@@ -173,7 +152,16 @@
          </layout>
         </item>
         <item>
-         <widget class="QTextBrowser" name="Text_shower"/>
+         <widget class="QTextBrowser" name="Text_shower">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="cursor" stdset="0">
+           <cursorShape>IBeamCursor</cursorShape>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QFormLayout" name="formLayout_2">
