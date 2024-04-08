@@ -27,7 +27,7 @@ private slots:
     void handle_new_connection();
     void ReadyReadFromClient();
     void Disconnected_FromServer();
-    void sendDataToClient();
+    void sendDataToClient(QString d);
     void on_Send_BTN_clicked();
     void on_Create_New_Server_BTN_clicked();
     void on_pushButton_2_clicked();
@@ -35,6 +35,10 @@ private slots:
     void on_listen_btn_clicked();
     void keyPressEvent(QKeyEvent* kp);
     void on_Curent_Client_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_submit_btn_download_clicked();
+
+    void on_submit_btn_upload_clicked();
 
 private:
     Ui::My_Server *ui;
@@ -44,6 +48,11 @@ private:
     QTcpSocket* currentClient;
     QVector<QString> Commands_List;
     int command_index;
+    bool is_downloading = 0;
+    bool is_uploading = 0;
+    //
+    void receive_file(QString path);
+    void send_file(QString save_pa, QString rec_path);
 };
 
 #endif // MY_SERVER_H
